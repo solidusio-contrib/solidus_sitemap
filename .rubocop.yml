@@ -1,8 +1,0 @@
----
-inherit_from: .hound.yml
-
-AllCops:
-  Exclude:
-    - spec/dummy/**/*
-    - bin/*
-    - Guardfile

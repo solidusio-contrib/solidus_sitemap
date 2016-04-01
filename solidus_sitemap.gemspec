@@ -31,6 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sqlite3', '~> 1.3.10'
   s.add_development_dependency 'simplecov', '~> 0.9.0'
   s.add_development_dependency 'pry-rails'
-  s.add_development_dependency 'rubocop', '>= 0.24.1'
   s.add_development_dependency 'coffee-script', '~> 2.4.1'
 end
