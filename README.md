@@ -24,36 +24,53 @@ Check out the [README][1] for the [sitemap_generator][1].
 
 ## Installation
 
-1) add the gem to your `Gemfile`:
-```ruby
-gem 'solidus_sitemap', github: 'StemboltHQ/solidus_sitemap', branch: 'master'
-```
+1. Add the gem to your Solidus store's `Gemfile`:
+   ```ruby
+   gem 'solidus_sitemap', github: 'StemboltHQ/solidus_sitemap', branch: 'master'
+   ```
 
-2) run bundler:
+2. Update your bundle:
 
-`bundle install`
+   ```
+   $ bundle install
+   ```
 
-3) run the installer, it will create a `config/sitemap.rb` file with some sane defaults
+3. Run the installer, it will create a `config/sitemap.rb` file with some sane
+   defaults
 
-`rails g solidus_sitemap:install`
+   ```
+   $ rails g solidus_sitemap:install
+   ```
 
-4) add sitemap to your `.gitignore`
+4. Add the sitemap to your `.gitignore`, since it will be regenerated
+   server-side.
 
-`echo "public/sitemap*" >> .gitignore`
+   ```
+   $ echo "public/sitemap*" >> .gitignore
+   ```
 
-5) setup a daily cron job to regenrate your sitemap via the `rake sitemap:refresh` task. If you use the Whenever gem, add this to your `config/schedule.rb`
-```ruby
-every 1.day, at: '5:00 am' do
-  rake '-s sitemap:refresh'
-end
-```
+5. Set up a cron job to regenrate your sitemap via the `rake sitemap:refresh`
+   task. If you use the [Whenever gem](https://github.com/javan/whenever), add
+   this to your `config/schedule.rb`:
 
-6) make sure crawlers can find the sitemap, by adding the following line to your `public/robots.txt` with your correct domain name
+   ```ruby
+   every 1.day, at: '5:00 am' do
+     rake '-s sitemap:refresh'
+   end
+   ```
 
-`echo "Sitemap: http://www.example.com/sitemap.xml.gz" >> public/robots.txt`
+6. Ensure crawlers can find the sitemap, by adding the following line to your
+   `public/robots.txt` with your correct domain name
 
-**Thanks**
+   ```
+   $ echo "Sitemap: http://www.example.com/sitemap.xml.gz" >> public/robots.txt
+   ```
 
+---
+
+## Acknowledgements
+
+- [The original Spree version of this gem](https://github.com/spree-contrib/spree_sitemap)
 - [The creators & contributors of sitemap_generator](http://github.com/kjvarga/sitemap_generator/contributors)
 - [Joshua Nussbaum's original implementation of spree-sitemap-generator](https://github.com/joshnuss/spree-sitemap-generator)
 
