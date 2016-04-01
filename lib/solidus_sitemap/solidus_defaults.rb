@@ -1,4 +1,4 @@
-module SpreeSitemap::SpreeDefaults
+module SolidusSitemap::SolidusDefaults
   include Spree::Core::Engine.routes.url_helpers
   include Spree::BaseHelper # for meta_data
 
@@ -92,8 +92,8 @@ module SpreeSitemap::SpreeDefaults
   #
   # NOTE title should match the page title, however the title generation isn't self-contained
   # although not a future proof solution, the best (+ easiest) solution is to mimic the title for product pages
-  #   https://github.com/spree/spree/blob/1-3-stable/core/lib/spree/core/controller_helpers/common.rb#L39
-  #   https://github.com/spree/spree/blob/1-3-stable/core/app/controllers/spree/products_controller.rb#L41
+  #   https://github.com/solidusio/solidus/blob/1-3-stable/core/lib/spree/core/controller_helpers/common.rb#L39
+  #   https://github.com/solidusio/solidus/blob/1-3-stable/core/app/controllers/spree/products_controller.rb#L41
   #
   def video_options(youtube_id, object = false)
     ({ description: meta_data(object)[:description] } rescue {}).merge(

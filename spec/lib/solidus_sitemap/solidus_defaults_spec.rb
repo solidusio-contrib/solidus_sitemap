@@ -1,6 +1,6 @@
-RSpec.describe SpreeSitemap::SpreeDefaults do
+RSpec.describe SolidusSitemap::SolidusDefaults do
   before do
-    @interpreter = SitemapGenerator::Interpreter.send :include, SpreeSitemap::SpreeDefaults
+    @interpreter = SitemapGenerator::Interpreter.send :include, SolidusSitemap::SolidusDefaults
   end
 
   subject { @interpreter.new }
@@ -34,7 +34,7 @@ RSpec.describe SpreeSitemap::SpreeDefaults do
 
     context 'when there is no such gem' do
       it 'returns false' do
-        expect(subject.gem_available?('fake_spree_gem_name')).to be false
+        expect(subject.gem_available?('fake_solidus_gem_name')).to be false
       end
     end
   end

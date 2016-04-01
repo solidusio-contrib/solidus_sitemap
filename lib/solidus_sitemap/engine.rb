@@ -1,8 +1,8 @@
-module SpreeSitemap
+module SolidusSitemap
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
-    engine_name 'spree_sitemap'
+    engine_name 'solidus_sitemap'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -14,10 +14,10 @@ module SpreeSitemap
         end
       end
 
-      require 'spree_sitemap/spree_defaults'
-      SitemapGenerator::Interpreter.send :include, SpreeSitemap::SpreeDefaults
+      require 'solidus_sitemap/solidus_defaults'
+      SitemapGenerator::Interpreter.send :include, SolidusSitemap::SolidusDefaults
       if defined? SitemapGenerator::LinkSet
-        SitemapGenerator::LinkSet.send :include, SpreeSitemap::SpreeDefaults
+        SitemapGenerator::LinkSet.send :include, SolidusSitemap::SolidusDefaults
       end
     end
 

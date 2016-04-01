@@ -1,9 +1,9 @@
-# Spree Sitemap
+# Solidus Sitemap
 
-[![Build Status](https://travis-ci.org/spree-contrib/spree_sitemap.svg?branch=master)](https://travis-ci.org/spree-contrib/spree_sitemap)
-[![Code Climate](https://codeclimate.com/github/spree-contrib/spree_sitemap/badges/gpa.svg)](https://codeclimate.com/github/spree-contrib/spree_sitemap)
-
-Spree Sitemap is a sitemap generator based on the [sitemap_generator][1] gem. It adheres to the Sitemap 0.9 protocol specification.
+Solidus Sitemap is a sitemap generator based on the [sitemap_generator][1] gem.
+It adheres to the Sitemap 0.9 protocol specification. This is a continuation of
+the [original Spree version](https://github.com/spree-contrib/spree_sitemap),
+updated to work with the [Solidus](https://solidus.io) eCommerce platform.
 
 ### Features
 
@@ -11,8 +11,8 @@ Spree Sitemap is a sitemap generator based on the [sitemap_generator][1] gem. It
 - Supports large huge product catalogs
 - Adheres to 0.9 Sitemap protocol specification
 - Compresses sitemaps with gzip
-- Provides basic sitemap of a Spree site (products, taxons, login page, signup page)
-- Easily add additional sitemaps for pages you add to your spree site
+- Provides basic sitemap of a Solidus site (products, taxons, login page, signup page)
+- Easily add additional sitemaps for pages you add to your solidus site
 - Supports Amazon S3 and other hosting services
 - Thin wrapper over battle tested sitemap generator
 
@@ -26,7 +26,7 @@ Check out the [README][1] for the [sitemap_generator][1].
 
 1) add the gem to your `Gemfile`:
 ```ruby
-gem 'spree_sitemap', github: 'spree-contrib/spree_sitemap', branch: 'master'
+gem 'solidus_sitemap', github: 'StemboltHQ/solidus_sitemap', branch: 'master'
 ```
 
 2) run bundler:
@@ -35,7 +35,7 @@ gem 'spree_sitemap', github: 'spree-contrib/spree_sitemap', branch: 'master'
 
 3) run the installer, it will create a `config/sitemap.rb` file with some sane defaults
 
-`rails g spree_sitemap:install`
+`rails g solidus_sitemap:install`
 
 4) add sitemap to your `.gitignore`
 
@@ -57,15 +57,11 @@ end
 - [The creators & contributors of sitemap_generator](http://github.com/kjvarga/sitemap_generator/contributors)
 - [Joshua Nussbaum's original implementation of spree-sitemap-generator](https://github.com/joshnuss/spree-sitemap-generator)
 
-**Donations**
-
-_Bitcoin donations may be sent to: 18HEAFjeDaa15AihyGvKvR19XEkm5aCJk5_
-
 ---
 
 ## Upgrading
 
-If you upgrade from early versions of `spree_sitemap` you need to change your sitemaps from:
+If you upgrade from early versions of `solidus_sitemap` you need to change your sitemaps from:
 ```ruby
 SitemapGenerator::Sitemap.add_links do
   # ...
@@ -87,10 +83,12 @@ See corresponding [guidelines][2]
 
 ---
 
+Copyright (c) 2016 [Stembolt](https://stembolt.com/)
+
 Copyright (c) 2011-2015 [Jeff Dutil][5] and other [contributors][6], released under the [New BSD License][4].
 
 [1]: http://github.com/kjvarga/sitemap_generator
 [2]: https://github.com/spree-contrib/spree_i18n/blob/master/CONTRIBUTING.md
 [4]: https://github.com/spree-contrib/spree_sitemap/blob/master/LICENSE.md
 [5]: https://github.com/jdutil
-[6]: https://github.com/spree-contrib/spree_sitemap/graphs/contributors
+[6]: https://github.com/StemboltHQ/solidus_sitemap/graphs/contributors
