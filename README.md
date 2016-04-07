@@ -1,5 +1,7 @@
 # Solidus Sitemap
 
+[![Build Status](https://travis-ci.org/StemboltHQ/solidus_sitemap.svg?branch=master)](https://travis-ci.org/StemboltHQ/solidus_sitemap)
+
 Solidus Sitemap is a sitemap generator based on the [sitemap_generator][1] gem.
 It adheres to the Sitemap 0.9 protocol specification. This is a continuation of
 the [original Spree version](https://github.com/spree-contrib/spree_sitemap),
