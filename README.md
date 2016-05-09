@@ -1,6 +1,6 @@
 # Solidus Sitemap
 
-[![Build Status](https://travis-ci.org/StemboltHQ/solidus_sitemap.svg?branch=master)](https://travis-ci.org/StemboltHQ/solidus_sitemap)
+[![Build Status](https://travis-ci.org/solidusio-contrib/solidus_sitemap.svg?branch=master)](https://travis-ci.org/solidusio-contrib/solidus_sitemap)
 
 Solidus Sitemap is a sitemap generator based on the [sitemap_generator][1] gem.
 It adheres to the Sitemap 0.9 protocol specification. This is a continuation of
@@ -28,7 +28,7 @@ Check out the [README][1] for the [sitemap_generator][1].
 
 1. Add the gem to your Solidus store's `Gemfile`:
    ```ruby
-   gem 'solidus_sitemap', github: 'StemboltHQ/solidus_sitemap', branch: 'master'
+   gem 'solidus_sitemap', github: 'solidusio-contrib/solidus_sitemap', branch: 'master'
    ```
 
 2. Update your bundle:
@@ -110,4 +110,4 @@ Copyright (c) 2011-2015 [Jeff Dutil][5] and other [contributors][6], released un
 [2]: https://github.com/spree-contrib/spree_i18n/blob/master/CONTRIBUTING.md
 [4]: https://github.com/spree-contrib/spree_sitemap/blob/master/LICENSE.md
 [5]: https://github.com/jdutil
-[6]: https://github.com/StemboltHQ/solidus_sitemap/graphs/contributors
+[6]: https://github.com/solidusio-contrib/solidus_sitemap/graphs/contributors
