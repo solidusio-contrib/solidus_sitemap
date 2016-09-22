@@ -8,10 +8,10 @@ module SolidusSitemap
   end
 
   module VERSION
-    MAJOR = 4
+    MAJOR = 1
     MINOR = 0
     TINY  = 0
-    PRE   = 'RELEASE'
+    PRE   = nil
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
   end
