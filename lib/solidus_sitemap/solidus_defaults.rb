@@ -23,7 +23,7 @@ module SolidusSitemap::SolidusDefaults
   end
 
   def add_products(options = {})
-    active_products = Spree::Product.active.uniq
+    active_products = Spree::Product.where(deleted_at: nil).where("available_on < ?", DateTime.now).distinct
 
     add(products_path, options.merge(lastmod: active_products.last_updated))
     active_products.each do |product|
