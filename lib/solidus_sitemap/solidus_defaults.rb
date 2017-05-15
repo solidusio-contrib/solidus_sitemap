@@ -23,10 +23,10 @@ module SolidusSitemap::SolidusDefaults
   end
 
   def add_products(options = {})
-    active_products = Spree::Product.active.uniq
+    available_products = Spree::Product.available.uniq
 
-    add(products_path, options.merge(lastmod: active_products.last_updated))
-    active_products.each do |product|
+    add(products_path, options.merge(lastmod: available_products.last_updated))
+    available_products.each do |product|
       add_product(product, options)
     end
   end
