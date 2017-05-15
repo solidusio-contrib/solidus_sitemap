@@ -1,9 +1,21 @@
 RSpec.describe SolidusSitemap::SolidusDefaults do
-  before do
-    @interpreter = SitemapGenerator::Interpreter.send :include, SolidusSitemap::SolidusDefaults
+  let(:interpreter) do
+    Class.new do
+      attr_accessor :entries
+
+      include SolidusSitemap::SolidusDefaults
+
+      def initialize
+        self.entries = []
+      end
+
+      def add(url, options)
+        self.entries << url
+      end
+    end
   end
 
-  subject { @interpreter.new }
+  subject { interpreter.new }
 
   context 'Interpreter' do
     %w( add_login
@@ -49,7 +61,32 @@ RSpec.describe SolidusSitemap::SolidusDefaults do
   skip '.add_signup(options = {})'
   skip '.add_account(options = {})'
   skip '.add_password_reset(options = {})'
-  skip '.add_products(options = {})'
+
+  describe '.add_products(options = {})' do
+    let!(:not_available) { create(:product, available_on: 1.week.from_now) }
+    let!(:soft_deleted) { create(:product).tap(&:destroy) }
+    let!(:available) { create(:product) }
+
+    it "includes the product index" do
+      subject.add_products
+
+      expect(subject.entries).to include("/products")
+    end
+
+    it "includes avilable products" do
+      subject.add_products
+
+      expect(subject.entries).to include("/products/#{available.slug}")
+    end
+
+    it "doesn't include unavailable products" do
+      subject.add_products
+
+      expect(subject.entries).not_to include("/products/#{not_available.slug}")
+      expect(subject.entries).not_to include("/products/#{soft_deleted.slug}")
+    end
+  end
+
   skip '.add_product(product, options = {})'
   skip '.add_pages(options = {})'
   skip '.add_taxons(options = {})'
