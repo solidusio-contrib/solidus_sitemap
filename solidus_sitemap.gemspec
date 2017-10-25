@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'sitemap_generator', '~> 5.1.0'
 
   s.add_development_dependency 'database_cleaner', '~> 1.4.0'
-  s.add_development_dependency 'factory_girl', '~> 4.4'
+  s.add_development_dependency 'factory_bot', '~> 4.4'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails', '~> 3.5'
   s.add_development_dependency 'sqlite3', '~> 1.3.10'
