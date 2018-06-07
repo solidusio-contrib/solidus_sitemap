@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_runtime_dependency 'solidus_core', ['>= 1.1', '< 3']
-  s.add_runtime_dependency 'sitemap_generator', '~> 5.1.0'
+  s.add_runtime_dependency 'sitemap_generator', '~> 6.0.1'
 
-  s.add_development_dependency 'database_cleaner', '~> 1.4.0'
+  s.add_development_dependency 'database_cleaner', '~> 1.7.0'
   s.add_development_dependency 'factory_bot', '~> 4.4'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails', '~> 3.5'
