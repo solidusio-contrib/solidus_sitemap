@@ -64,7 +64,13 @@ RSpec.describe SolidusSitemap::SolidusDefaults do
 
   describe '.add_products(options = {})' do
     let!(:not_available) { create(:product, available_on: 1.week.from_now) }
-    let!(:soft_deleted) { create(:product).tap(&:destroy) }
+
+    if Spree.solidus_gem_version >= Gem::Version.new('2.5.0')
+      let!(:soft_deleted) { create(:product).tap(&:discard) }
+    else
+      let!(:soft_deleted) { create(:product).tap(&:destroy) }
+    end
+
     let!(:available) { create(:product) }
 
     it "includes the product index" do
