@@ -79,7 +79,7 @@ RSpec.describe SolidusSitemap::SolidusDefaults do
       expect(subject.entries).to include("/products")
     end
 
-    it "includes avilable products" do
+    it "includes available products" do
       subject.add_products
 
       expect(subject.entries).to include("/products/#{available.slug}")

@@ -47,15 +47,19 @@ module SolidusSitemap::SolidusDefaults
   end
 
   def add_pages(options = {})
-    # TODO: this should be refactored to add_pages & add_page
-
     Spree::Page.active.each do |page|
-      add(page.path, options.merge(lastmod: page.updated_at))
+      add_page(page, options.merge(attr: :path))
     end if gem_available? 'spree_essential_cms'
 
     Spree::Page.visible.each do |page|
-      add(page.slug, options.merge(lastmod: page.updated_at))
+      add_page(page, options.merge(attr: :slug))
     end if gem_available? 'spree_static_content'
+  end
+
+  def add_page(page, options = {})
+    opts = options.merge(lastmod: page.updated_at)
+    attr = opts.delete(:attr)
+    add(page.send(attr), opts)
   end
 
   def add_taxons(options = {})
