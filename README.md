@@ -70,6 +70,35 @@ Check out the [README][1] for the [sitemap_generator][1].
 
 ---
 
+## Releasing
+
+We use [gem-release](https://github.com/svenfuchs/gem-release) to release this
+extension with ease.
+
+Supposing you are on the master branch and you are working on a fork of this
+extension, `upstream` is the main remote and you have write access to it, you
+can simply run:
+
+```bash
+gem bump --version minor --tag --release
+```
+
+This command will:
+
+- bump the gem version to the next minor (changing the `version.rb` file)
+- commit the change and push it to upstream master
+- create a git tag
+- push the tag to the upstream remote
+- release the new version on RubyGems
+
+Or you can run these commands individually:
+
+```bash
+gem bump --version minor
+gem tag
+gem release
+```
+
 ## Acknowledgements
 
 - [The original Spree version of this gem](https://github.com/spree-contrib/spree_sitemap)

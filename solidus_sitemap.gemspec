@@ -7,7 +7,7 @@ require 'solidus_sitemap/version'
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_sitemap'
-  s.version     = SolidusSitemap.version
+  s.version     = SolidusSitemap::VERSION
   s.summary     = 'Provides a sitemap file for Solidus'
   s.description = s.summary
   s.required_ruby_version = '>= 2.1.0'
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner', '~> 1.7.0'
   s.add_development_dependency 'factory_bot', '~> 4.4'
   s.add_development_dependency 'ffaker'
+  s.add_development_dependency 'gem-release', '~> 2.0'
   s.add_development_dependency 'rspec-rails', '~> 3.5'
   s.add_development_dependency 'sqlite3', '~> 1.3.10'
   s.add_development_dependency 'simplecov', '~> 0.16.1'
