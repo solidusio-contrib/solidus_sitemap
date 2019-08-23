@@ -147,6 +147,14 @@ See corresponding [guidelines][2]
 
 ---
 
+## Maintainer
+
+![Nebulab](http://nebulab.it/assets/images/public/logo.svg)
+
+---
+
+Copyright (c) 2019 [Nebulab](https://nebulab.it)
+
 Copyright (c) 2016 [Stembolt](https://stembolt.com/)
 
 Copyright (c) 2011-2015 [Jeff Dutil][5] and other [contributors][6], released under the [New BSD License][4].

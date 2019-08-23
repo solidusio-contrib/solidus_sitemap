@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.description = s.summary
   s.required_ruby_version = '>= 2.1.0'
 
-  s.author            = 'Stembolt'
-  s.email             = 'contact@stembolt.com'
-  s.homepage          = 'https://github.com/StemboltHQ/solidus_sitemap'
+  s.author            = 'Nebulab'
+  s.email             = 'opensource@nebulab.it'
+  s.homepage          = 'https://nebulab.it'
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- spec/*`.split("\n")
