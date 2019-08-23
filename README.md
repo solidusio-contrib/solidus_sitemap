@@ -70,6 +70,51 @@ Check out the [README][1] for the [sitemap_generator][1].
 
 ---
 
+## Releasing a new version
+
+#### 1. Bump gem version and push to RubyGems
+
+We use [gem-release](https://github.com/svenfuchs/gem-release) to release this
+extension with ease.
+
+Supposing you are on the master branch and you are working on a fork of this
+extension, `upstream` is the main remote and you have write access to it, you
+can simply run:
+
+```bash
+gem bump --version minor --tag --release
+```
+
+This command will:
+
+- bump the gem version to the next minor (changing the `version.rb` file)
+- commit the change and push it to upstream master
+- create a git tag
+- push the tag to the upstream remote
+- release the new version on RubyGems
+
+Or you can run these commands individually:
+
+```bash
+gem bump --version minor
+gem tag
+gem release
+```
+
+#### 2. Publish the updated CHANGELOG
+
+After the release is done we can generate the updated CHANGELOG
+using
+[github-changelog-generator](https://github.com/github-changelog-generator/github-changelog-generator)
+by running the following command:
+
+
+```bash
+bundle exec github_changelog_generator solidusio/solidus_sitemap --token YOUR_GITHUB_TOKEN
+git commit -am 'Update CHANGELOG'
+git push upstream master
+```
+
 ## Acknowledgements
 
 - [The original Spree version of this gem](https://github.com/spree-contrib/spree_sitemap)
@@ -101,6 +146,14 @@ end
 See corresponding [guidelines][2]
 
 ---
+
+## Maintainer
+
+![Nebulab](http://nebulab.it/assets/images/public/logo.svg)
+
+---
+
+Copyright (c) 2019 [Nebulab](https://nebulab.it)
 
 Copyright (c) 2016 [Stembolt](https://stembolt.com/)
 
