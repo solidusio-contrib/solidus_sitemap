@@ -70,7 +70,9 @@ Check out the [README][1] for the [sitemap_generator][1].
 
 ---
 
-## Releasing
+## Releasing a new version
+
+#### 1. Bump gem version and push to RubyGems
 
 We use [gem-release](https://github.com/svenfuchs/gem-release) to release this
 extension with ease.
@@ -97,6 +99,20 @@ Or you can run these commands individually:
 gem bump --version minor
 gem tag
 gem release
+```
+
+#### 2. Publish the updated CHANGELOG
+
+After the release is done we can generate the updated CHANGELOG
+using
+[github-changelog-generator](https://github.com/github-changelog-generator/github-changelog-generator)
+by running the following command:
+
+
+```bash
+bundle exec github_changelog_generator solidusio/solidus_sitemap --token YOUR_GITHUB_TOKEN
+git commit -am 'Update CHANGELOG'
+git push upstream master
 ```
 
 ## Acknowledgements

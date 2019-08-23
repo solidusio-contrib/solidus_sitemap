@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_bot', '~> 4.4'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'gem-release', '~> 2.0'
+  s.add_development_dependency "github_changelog_generator", "~> 1.14"
   s.add_development_dependency 'rspec-rails', '~> 3.5'
   s.add_development_dependency 'sqlite3', '~> 1.3.10'
   s.add_development_dependency 'simplecov', '~> 0.16.1'
