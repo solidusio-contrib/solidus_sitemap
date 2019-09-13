@@ -1,17 +1,16 @@
+# frozen_string_literal: true
+
 module SolidusSitemap
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
     engine_name 'solidus_sitemap'
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W[#{config.root}/lib]
 
-    def self.activate
-      Spree::Product.class_eval do
-        def self.last_updated
-          last_update = order('spree_products.updated_at DESC').first
-          last_update.try(:updated_at)
-        end
+    config.to_prepare do
+      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
       require 'solidus_sitemap/solidus_defaults'
@@ -20,7 +19,5 @@ module SolidusSitemap
         SitemapGenerator::LinkSet.send :include, SolidusSitemap::SolidusDefaults
       end
     end
-
-    config.to_prepare(&method(:activate).to_proc)
   end
 end
