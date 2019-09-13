@@ -95,6 +95,34 @@ RSpec.describe SolidusSitemap::SolidusDefaults do
 
   skip '.add_product(product, options = {})'
   skip '.add_pages(options = {})'
-  skip '.add_taxons(options = {})'
-  skip '.add_taxon(taxon, options = {})'
+
+  describe '.add_taxons(options = {})' do
+    subject { sitemap_generator.add_taxons(options) }
+
+    let(:sitemap_generator) { interpreter.new }
+    let(:options) { {} }
+    let(:expected_entries) { %w[/t/sample-taxonomy /t/sample-taxon] }
+
+    before do
+      taxonomy = create :taxonomy, name: 'Sample taxonomy'
+      create :taxon, name: 'Sample taxon', taxonomy: taxonomy
+    end
+
+    it 'add login path' do
+      expect { subject }.to change(sitemap_generator, :entries).from([]).to(expected_entries)
+    end
+  end
+
+  describe '.add_taxon(taxon, options = {})' do
+    subject { sitemap_generator.add_taxon(taxon, options) }
+
+    let(:sitemap_generator) { interpreter.new }
+    let(:taxon) { create(:taxon, name: 'Sample Taxon') }
+    let(:options) { {} }
+    let(:expected_entries) { %w[/t/sample-taxon] }
+
+    it 'add login path' do
+      expect { subject }.to change(sitemap_generator, :entries).from([]).to(expected_entries)
+    end
+  end
 end
