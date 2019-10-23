@@ -2,8 +2,9 @@
 
 [![Build Status](https://circleci.com/gh/solidusio-contrib/solidus_sitemap.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_sitemap)
 
-Solidus Sitemap is a sitemap generator based on the [sitemap_generator][1] gem. It adheres to the
-Sitemap 0.9 protocol specification.
+Solidus Sitemap is a sitemap generator based on the
+[sitemap_generator](https://github.com/kjvarga/sitemap_generator) gem. It adheres to the Sitemap
+0.9 protocol specification.
 
 ## Capabilities
 
