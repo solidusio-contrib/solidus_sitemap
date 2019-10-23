@@ -2,84 +2,88 @@
 
 [![Build Status](https://circleci.com/gh/solidusio-contrib/solidus_sitemap.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_sitemap)
 
-Solidus Sitemap is a sitemap generator based on the [sitemap_generator][1] gem.
-It adheres to the Sitemap 0.9 protocol specification. This is a continuation of
-the [original Spree version](https://github.com/spree-contrib/spree_sitemap),
-updated to work with the [Solidus](https://solidus.io) eCommerce platform.
+Solidus Sitemap is a sitemap generator based on the [sitemap_generator][1] gem. It adheres to the
+Sitemap 0.9 protocol specification.
 
-### Features
+## Capabilities
 
-- Notifies search engine of new sitemaps (Google, Yahoo, Ask, Bing)
-- Supports large huge product catalogs
-- Adheres to 0.9 Sitemap protocol specification
+- Adheres to the 0.9 Sitemap protocol specification
+- Notifies search engines of new sitemap versions
+- Supports large product catalogs
 - Compresses sitemaps with gzip
-- Provides basic sitemap of a Solidus site (products, taxons, login page, signup page)
-- Easily add additional sitemaps for pages you add to your solidus site
+- Allows you to easily add additional sitemaps for custom pages in your site
 - Supports Amazon S3 and other hosting services
-- Thin wrapper over battle tested sitemap generator
-
-### Configuration Options
-
-Check out the [README][1] for the [sitemap_generator][1].
-
----
 
 ## Installation
 
-1. Add the gem to your Solidus store's `Gemfile`:
-   ```ruby
-   gem 'solidus_sitemap', github: 'solidusio-contrib/solidus_sitemap', branch: 'master'
-   ```
+First of all, add the gem to your store's `Gemfile`:
 
-2. Update your bundle:
+```ruby
+gem 'solidus_sitemap', github: 'solidusio-contrib/solidus_sitemap'
+```
 
-   ```
-   $ bundle install
-   ```
+Bundle your dependencies:
 
-3. Run the installer, it will create a `config/sitemap.rb` file with some sane
-   defaults
+```console
+$ bundle install
+```
 
-   ```
-   $ rails g solidus_sitemap:install
-   ```
+Run the installer, which will create a `config/sitemap.rb` file with some sane defaults:
 
-4. Add the sitemap to your `.gitignore`, since it will be regenerated
-   server-side.
+```console
+$ rails g solidus_sitemap:install
+```
 
-   ```
-   $ echo "public/sitemap*" >> .gitignore
-   ```
+Set up a cron job to regenerate your sitemap via the `rake sitemap:refresh` task. If you use the
+[Whenever gem](https://github.com/javan/whenever), add this to your `config/schedule.rb`:
 
-5. Set up a cron job to regenrate your sitemap via the `rake sitemap:refresh`
-   task. If you use the [Whenever gem](https://github.com/javan/whenever), add
-   this to your `config/schedule.rb`:
+```ruby
+every 1.day, at: '5:00 am' do
+ rake '-s sitemap:refresh'
+end
+```
 
-   ```ruby
-   every 1.day, at: '5:00 am' do
-     rake '-s sitemap:refresh'
-   end
-   ```
+Ensure crawlers can find the sitemap by adding the following line to your `public/robots.txt` with
+your own domain:
 
-6. Ensure crawlers can find the sitemap, by adding the following line to your
-   `public/robots.txt` with your correct domain name
+```console
+$ echo "Sitemap: http://www.example.com/sitemap.xml.gz" >> public/robots.txt
+```
 
-   ```
-   $ echo "Sitemap: http://www.example.com/sitemap.xml.gz" >> public/robots.txt
-   ```
+## Upgrading
 
----
+If you're upgrading from early versions of `solidus_sitemap`, you need to change your sitemaps from
+this:
 
-## Releasing a new version
+```ruby
+SitemapGenerator::Sitemap.add_links do
+  # ...
+end
+```
+
+To this:
+
+```ruby
+SitemapGenerator::Sitemap.create do
+  # ...
+end
+```
+
+## Configuration
+
+Check out the [readme](https://github.com/kjvarga/sitemap_generator/blob/master/README.md) of the
+[sitemap_generator](https://github.com/kjvarga/sitemap_generator) gem.
+
+## Contributing
+
+### Releasing new versions
 
 #### 1. Bump gem version and push to RubyGems
 
-We use [gem-release](https://github.com/svenfuchs/gem-release) to release this
-extension with ease.
+We use [gem-release](https://github.com/svenfuchs/gem-release) to release this extension with ease.
 
-Supposing you are on the master branch and you are working on a fork of this
-extension, `upstream` is the main remote and you have write access to it, you
-can simply run:
+Supposing you are on the master branch and you are working on a fork of this extension, `upstream`
+is the main remote and you have write access to it, you can simply run:
 
 ```bash
 gem bump --version minor --tag --release
@@ -103,11 +107,9 @@ gem release
 
 #### 2. Publish the updated CHANGELOG
 
-After the release is done we can generate the updated CHANGELOG
-using
+After the release is done we can generate the updated CHANGELOG using
 [github-changelog-generator](https://github.com/github-changelog-generator/github-changelog-generator)
 by running the following command:
-
 
 ```bash
 bundle exec github_changelog_generator solidusio/solidus_sitemap --token YOUR_GITHUB_TOKEN
@@ -121,46 +123,14 @@ git push upstream master
 - [The creators & contributors of sitemap_generator](http://github.com/kjvarga/sitemap_generator/contributors)
 - [Joshua Nussbaum's original implementation of spree-sitemap-generator](https://github.com/joshnuss/spree-sitemap-generator)
 
----
-
-## Upgrading
-
-If you upgrade from early versions of `solidus_sitemap` you need to change your sitemaps from:
-```ruby
-SitemapGenerator::Sitemap.add_links do
-  # ...
-end
-```
-
-to this:
-```ruby
-SitemapGenerator::Sitemap.create do
-  # ...
-end
-```
-
----
-
-## Contributing
-
-See corresponding [guidelines][2]
-
----
-
-## Maintainer
+## License
 
 ![Nebulab](http://nebulab.it/assets/images/public/logo.svg)
 
----
+Copyright (c) 2019 [Nebulab](https://nebulab.it).
 
-Copyright (c) 2019 [Nebulab](https://nebulab.it)
+Copyright (c) 2016-2018 [Stembolt](https://stembolt.com/).
 
-Copyright (c) 2016 [Stembolt](https://stembolt.com/)
-
-Copyright (c) 2011-2015 [Jeff Dutil][5] and other [contributors][6], released under the [New BSD License][4].
-
-[1]: http://github.com/kjvarga/sitemap_generator
-[2]: https://github.com/spree-contrib/spree_i18n/blob/master/CONTRIBUTING.md
-[4]: https://github.com/spree-contrib/spree_sitemap/blob/master/LICENSE.md
-[5]: https://github.com/jdutil
-[6]: https://github.com/solidusio-contrib/solidus_sitemap/graphs/contributors
+Copyright (c) 2011-2015 [Jeff Dutil](https://github.com/jdutil) and
+[other contributors](https://github.com/solidusio-contrib/solidus_sitemap/graphs/contributors),
+released under the [New BSD License](https://github.com/kjvarga/sitemap_generator/blob/master/MIT-LICENSE).
