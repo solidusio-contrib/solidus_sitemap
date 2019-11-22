@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusSitemap::SolidusDefaults
   include Spree::Core::Engine.routes.url_helpers
   include Spree::BaseHelper # for meta_data
@@ -40,20 +42,24 @@ module SolidusSitemap::SolidusDefaults
 
       # don't include all the videos on the page to avoid duplicate title warnings
       primary_video = product.videos.first
-      opts.merge!(video: [video_options(primary_video.youtube_ref, product)])
+      opts[:video] = [video_options(primary_video.youtube_ref, product)]
     end
 
     add(product_path(product), opts)
   end
 
   def add_pages(options = {})
-    Spree::Page.active.each do |page|
-      add_page(page, options.merge(attr: :path))
-    end if gem_available? 'spree_essential_cms'
+    if gem_available? 'spree_essential_cms'
+      Spree::Page.active.each do |page|
+        add_page(page, options.merge(attr: :path))
+      end
+    end
 
-    Spree::Page.visible.each do |page|
-      add_page(page, options.merge(attr: :slug))
-    end if gem_available? 'spree_static_content'
+    if gem_available? 'spree_static_content'
+      Spree::Page.visible.each do |page|
+        add_page(page, options.merge(attr: :slug))
+      end
+    end
   end
 
   def add_page(page, options = {})
@@ -72,10 +78,10 @@ module SolidusSitemap::SolidusDefaults
   end
 
   def gem_available?(name)
-    Gem::Specification.find_by_name(name)
+    Gem::Specification.find_by_name(name) # rubocop:disable Rails/DynamicFindBy
   rescue Gem::LoadError
     false
-  rescue
+  rescue StandardError
     Gem.available?(name)
   end
 
@@ -100,12 +106,20 @@ module SolidusSitemap::SolidusDefaults
   #   https://github.com/solidusio/solidus/blob/1-3-stable/core/app/controllers/spree/products_controller.rb#L41
   #
   def video_options(youtube_id, object = false)
-    ({ description: meta_data(object)[:description] } rescue {}).merge(
-      ({ title: [Spree::Config[:site_name], object.name].join(' - ') } rescue {})
-    ).merge(
-      thumbnail_loc: "http://img.youtube.com/vi/#{youtube_id}/0.jpg",
-      player_loc: "http://www.youtube.com/v/#{youtube_id}",
-      autoplay: 'ap=1'
-    )
+    (begin
+       { description: meta_data(object)[:description] }
+     rescue StandardError
+       {}
+     end).merge(
+       (begin
+          { title: [Spree::Config[:site_name], object.name].join(' - ') }
+        rescue StandardError
+          {}
+        end)
+     ).merge(
+       thumbnail_loc: "http://img.youtube.com/vi/#{youtube_id}/0.jpg",
+       player_loc: "http://www.youtube.com/v/#{youtube_id}",
+       autoplay: 'ap=1'
+     )
   end
 end

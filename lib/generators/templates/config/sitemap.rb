@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 SitemapGenerator::Sitemap.default_host = "http://#{Spree::Store.default.url}"
 
 ##

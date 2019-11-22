@@ -14,9 +14,9 @@ module SolidusSitemap
       end
 
       require 'solidus_sitemap/solidus_defaults'
-      SitemapGenerator::Interpreter.send :include, SolidusSitemap::SolidusDefaults
+      SitemapGenerator::Interpreter.include SolidusSitemap::SolidusDefaults
       if defined? SitemapGenerator::LinkSet
-        SitemapGenerator::LinkSet.send :include, SolidusSitemap::SolidusDefaults
+        SitemapGenerator::LinkSet.include SolidusSitemap::SolidusDefaults
       end
     end
   end

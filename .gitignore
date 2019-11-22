@@ -12,3 +12,4 @@ coverage
 .ruby-version
 .ruby-gemset
 .bundle
+spec/examples.txt
