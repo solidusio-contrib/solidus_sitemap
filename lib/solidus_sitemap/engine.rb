@@ -1,21 +1,26 @@
 # frozen_string_literal: true
 
+require 'spree/core'
+
 module SolidusSitemap
   class Engine < Rails::Engine
-    require 'spree/core'
-    isolate_namespace Spree
+    include SolidusSupport::EngineExtensions::Decorators
+
+    isolate_namespace ::Spree
+
     engine_name 'solidus_sitemap'
 
-    config.autoload_paths += %W[#{config.root}/lib]
+    # use rspec for tests
+    config.generators do |g|
+      g.test_framework :rspec
+    end
 
     config.to_prepare do
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-
       require 'solidus_sitemap/solidus_defaults'
+
       SitemapGenerator::Interpreter.include SolidusSitemap::SolidusDefaults
-      if defined? SitemapGenerator::LinkSet
+
+      if defined?(SitemapGenerator::LinkSet)
         SitemapGenerator::LinkSet.include SolidusSitemap::SolidusDefaults
       end
     end
