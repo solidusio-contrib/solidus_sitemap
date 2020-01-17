@@ -1,10 +1,5 @@
 bump:
+  recurse: false
   file: 'lib/solidus_sitemap/version.rb'
-  message: Bump Solidus Sitemap to %{version}
-  remote: upstream
-  commit: true
-  push: true
-
-tag:
-  push: true
-  remote: upstream
+  message: Bump SolidusSitemap to %{version}
+  tag: true
