@@ -103,15 +103,12 @@ RSpec.describe SolidusSitemap::SolidusDefaults do
 
     let(:sitemap_generator) { interpreter.new }
     let(:options) { {} }
-    let(:expected_entries) { %w[/t/sample-taxonomy /t/sample-taxon] }
-
-    before do
-      taxonomy = create :taxonomy, name: 'Sample taxonomy'
-      create :taxon, name: 'Sample taxon', taxonomy: taxonomy
-    end
+    let(:taxonomy) { create :taxonomy, name: 'Sample taxonomy' }
+    let!(:taxon) { create :taxon, name: 'Sample taxon', taxonomy: taxonomy }
 
     it 'add login path' do
-      expect { subject }.to change(sitemap_generator, :entries).from([]).to(expected_entries)
+      expect { subject }.to change(sitemap_generator, :entries).from([])
+        .to contain_exactly(*taxonomy.taxons.map { |taxon| "/t/#{taxon.permalink}" })
     end
   end
 
@@ -121,10 +118,10 @@ RSpec.describe SolidusSitemap::SolidusDefaults do
     let(:sitemap_generator) { interpreter.new }
     let(:taxon) { create(:taxon, name: 'Sample Taxon') }
     let(:options) { {} }
-    let(:expected_entries) { %w[/t/sample-taxon] }
 
     it 'add login path' do
-      expect { subject }.to change(sitemap_generator, :entries).from([]).to(expected_entries)
+      expect { subject }.to change(sitemap_generator, :entries).from([])
+        .to contain_exactly("/t/#{taxon.permalink}")
     end
   end
 end
