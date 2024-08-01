@@ -9,25 +9,25 @@ module SolidusSitemap::SolidusDefaults
   end
 
   def add_login(options = {})
-    add(login_path, options)
+    add(main_app.login_path, options)
   end
 
   def add_signup(options = {})
-    add(signup_path, options)
+    add(main_app.signup_path, options)
   end
 
   def add_account(options = {})
-    add(account_path, options)
+    add(main_app.account_path, options)
   end
 
   def add_password_reset(options = {})
-    add(new_spree_user_password_path, options)
+    add(main_app.new_spree_user_password_path, options)
   end
 
   def add_products(options = {})
     available_products = Spree::Product.available.distinct
 
-    add(products_path, options.merge(lastmod: available_products.last_updated))
+    add(main_app.products_path, options.merge(lastmod: available_products.last_updated))
     available_products.find_each do |product|
       add_product(product, options)
     end
@@ -45,7 +45,7 @@ module SolidusSitemap::SolidusDefaults
       opts[:video] = [video_options(primary_video.youtube_ref, product)]
     end
 
-    add(product_path(product), opts)
+    add(main_app.product_path(product), opts)
   end
 
   def add_pages(options = {})
@@ -73,7 +73,7 @@ module SolidusSitemap::SolidusDefaults
   end
 
   def add_taxon(taxon, options = {})
-    add(nested_taxons_path(taxon.permalink), options.merge(lastmod: taxon.products.last_updated)) if taxon.permalink.present?
+    add(main_app.nested_taxons_path(taxon.permalink), options.merge(lastmod: taxon.products.last_updated)) if taxon.permalink.present?
     taxon.children.each { |child| add_taxon(child, options) }
   end
 
